@@ -1,0 +1,82 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Projects Test React app",
+    "description": "Projects Test React backend API.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Projects",
+      "description": "API for projects"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/get-all-projects": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "Get all projects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Projects"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Project": {
+      "required": ["_id", "name", "email", "password", "userRole"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "maxlength": 24,
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string",
+          "maxlength": 32
+        },
+        "planned_start_date": {
+          "type": "date",
+          "default": 0
+        },
+        "planned_end_date": {
+          "type": "date",
+          "default": 0
+        },
+        "sub_projects": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "planned_start_date": { "type": "date" },
+              "planned_end_date": { "type": "date" },
+              "id": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "Projects": {
+      "type": "array",
+      "$ref": "#/definitions/Project"
+    }
+  }
+}
